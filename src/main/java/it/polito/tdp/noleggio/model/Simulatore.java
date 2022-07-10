@@ -9,13 +9,13 @@ import it.polito.tdp.noleggio.model.Event.EventType;
 public class Simulatore {
 	
 	// Parametri di ingresso
-	private int NC ;
-	private Duration T_IN = Duration.ofMinutes(10) ;
-	private Duration T_TRAVEL = Duration.ofHours(1) ; // 1, 2, o 3 volte tanto
+	private int NC ; //numero auto
+	private Duration T_IN = Duration.ofMinutes(10) ; //intervallo tra arrivo clienti DEVO SETTARLO
+	private Duration T_TRAVEL = Duration.ofHours(1) ; // 1, 2, o 3 volte tanto //DEVO SETTARLO
 	
 	// Valori calcolati in uscita
-	private int nClientiTot ;
-	private int nClientiInsoddisfatti ;
+	private int nClientiTot ; //DEVO SOLO FARE GET, NON MODIFICABILE DA ESTERNO
+	private int nClientiInsoddisfatti ;//"
 	
 	// Stato del mondo
 	private int autoDisponibili ;
@@ -33,7 +33,7 @@ public class Simulatore {
 	public void run() {
 		
 		while(!this.queue.isEmpty()) {
-			Event e = this.queue.poll() ;
+			Event e = this.queue.poll() ; //OTTIENE E RIMUOVE LA TESTA DELLA CODA, OPPURE N ULL SE VUOTA MA QUA L'HO SCELTA NOT EMPTY
 			processEvent(e);
 		}
 		
@@ -55,7 +55,9 @@ public class Simulatore {
 			if(this.autoDisponibili>0) {
 				this.autoDisponibili-- ;
 				int ore = (int)(Math.random()*3)+1;
-				LocalTime oraRientro = e.getTime().plus(Duration.ofHours(ore * T_TRAVEL.toHours())) ; 
+				
+				//??????????????????????????????????????
+				LocalTime oraRientro = e.getTime().plus(Duration.ofHours(ore * T_TRAVEL.toHours())) ; //mi rientrerà tra ..quest'ora
 				this.queue.add(new Event(oraRientro, EventType.AUTO_RESTITUITA));
 			} else {
 				this.nClientiInsoddisfatti++ ;
@@ -63,6 +65,7 @@ public class Simulatore {
 			break;
 		case AUTO_RESTITUITA:
 			this.autoDisponibili++ ;
+				
 			break;
 		}
 	}

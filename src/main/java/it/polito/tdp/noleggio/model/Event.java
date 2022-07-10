@@ -3,8 +3,8 @@ package it.polito.tdp.noleggio.model;
 import java.time.LocalTime;
 
 public class Event implements Comparable<Event>{
-	
-	public enum EventType {
+	//COSTRUTTORI, GETTER SETTER, HASHCODE E EQUALS E COMPARETO 
+	public enum EventType {//classi degeneri
 		NUOVO_CLIENTE,
 		AUTO_RESTITUITA
 	}
@@ -59,7 +59,7 @@ public class Event implements Comparable<Event>{
 	@Override
 	public int compareTo(Event other) {
 		return this.time.compareTo(other.time);
-	}
+	} //ordine temporale
 	
 	
 	
